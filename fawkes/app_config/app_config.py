@@ -1,5 +1,13 @@
 import json
 import os
+import sys
+import jsonschema
+from jsonschema import ValidationError
+
+sys.path.append(os.path.realpath("."))
+
+import fawkes.constants as constants
+import fawkes.utils.utils as utils
 from pprint import pprint
 
 class App:
@@ -316,6 +324,8 @@ Definition of a Review Channel.
     """
 
     def __init__(self, config):
+        #Validate config with schema
+        self.validate_app_config_schema(config)
         # First we convert any env-keys to their actual values.
         config = self.inject_env_vars_as_values(config)
         # We initialize each of the attributes of AppConfig
@@ -366,3 +376,11 @@ Definition of a Review Channel.
             )
         return json.loads(config_string)
 
+    def validate_app_config_schema(self, document):
+        try:
+            schema = utils.open_json(
+                constants.APP_CONFIG_SCHEMA_FILE
+            )
+            jsonschema.validate(document, schema)
+        except ValidationError as e:
+            raise ValidationError("App config schema validation failed: " + str(e.message))

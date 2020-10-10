@@ -66,6 +66,7 @@ PLAYSTORE_FETCH_PAGES = 1
 # File paths
 APP_CONFIG_FILE = "app/{file_name}"
 APP_CONFIG_FILE_NAME = "app-config.json"
+APP_CONFIG_SCHEMA_FILE = "fawkes/app_config/app-config-schema.json"
 RAW_USER_REVIEWS_FILE_PATH = "{base_folder}/{dir_name}/{app_name}/{channel_name}-raw-feedback.{extension}"
 PARSED_USER_REVIEWS_FILE_PATH = "{base_folder}/{dir_name}/{app_name}/parsed-user-feedback.json"
 PROCESSED_USER_REVIEWS_FILE_PATH = "{base_folder}/{dir_name}/{app_name}/processed-user-feedback.json"

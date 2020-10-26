@@ -14,6 +14,7 @@ import fawkes.fetch.spreadsheet as spreadsheet
 import fawkes.fetch.tweets as tweets
 import fawkes.fetch.comma_separated_values as comma_separated_values
 import fawkes.fetch.remote as remote
+import fawkes.fetch.splunk as splunk
 
 import fawkes.utils.utils as utils
 import fawkes.constants.constants as constants
@@ -60,6 +61,10 @@ def fetch_reviews(fawkes_config_file = constants.FAWKES_CONFIG_FILE):
                     )
                 elif review_channel.channel_type == ReviewChannelTypes.IOS:
                     reviews = appstore.fetch(
+                        review_channel
+                    )
+                elif review_channel.channel_type == ReviewChannelTypes.SPLUNK:
+                    reviews = splunk.fetch(
                         review_channel
                     )
                 elif review_channel.channel_type == ReviewChannelTypes.REMOTE_FILE:
